@@ -3,9 +3,9 @@ import telebot
 import google.generativeai as genai
 
 # আপনার টেলিগ্রাম বটের টোকেন, এডমিন আইডি এবং জেমিনি এআই কি
-TELEGRAM_TOKEN = '8916232007:AAEA2Fu-0ajtJeTf4Yr6H9RPOuTTRevsL24'
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN', 'আপনার_বট_টোকেন_এখানে_দিন')
 ADMIN_ID = 8357226129
-GEMINI_API_KEY = "AQ.Ab8RN6JLhA5uE_duODuWrbUJ22i3-GQYjdPlWRL7LyLSCY1CGA"
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'AQ.Ab8RN6JLhA5uE_duODuWrbUJ22i3-GQYjdPlWRL7LyLSCY1CGA')
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 genai.configure(api_key=GEMINI_API_KEY)
@@ -19,7 +19,7 @@ def send_welcome(message):
 @bot.message_handler(func=lambda message: message.from_user.id != ADMIN_ID and message.chat.type == 'private')
 def handle_customer(message):
     user_id = message.chat.id
-    username = message.from_user.first_name
+    username = message.from_user.first_name or "User"
     text = message.text
 
     # অ্যাডমিন ইনবক্সে কাস্টমারের মেসেজ পাঠানোর কোড
@@ -51,7 +51,7 @@ def handle_customer(message):
        - Fresh Gmail: 22 BDT / $0.22
 
     Guidelines:
-    - If the user greets you or asks casual questions (like how are you, hi, hello), reply naturally and politely without showing the price list.
+    - If the user greets you or asks casual questions (like how are you, hi, hello, your name, etc.), reply naturally and politely without showing the price list.
     - If the user asks about Gmail accounts, prices, buying, or selling, provide the correct rates accurately.
     
     User message: {text}
@@ -62,9 +62,9 @@ def handle_customer(message):
         bot.reply_to(message, response.text)
     except Exception as e:
         print(f"Gemini Error: {e}")
-        bot.reply_to(message, "ওয়ালাইকুম আসসালাম! বলুন, জিমেইল সংক্রান্ত কী জানতে চান?")
+        bot.reply_to(message, "ধন্যবাদ! আপনার মেসেজটি অ্যাডমিনের কাছে পৌঁছে গেছে, খুব শীঘ্রই আপনাকে জানানো হবে।")
 
-# অ্যাডমিন যদি কোনো মেসেজ রিলাই করে সরাসরি কাস্টমারকে পাঠাতে চায়
+# অ্যাডমিন যদি কোনো মেসেজ রিপ্লাই করে সরাসরি কাস্টমারকে পাঠাতে চায়
 @bot.message_handler(func=lambda message: message.from_user.id == ADMIN_ID and message.reply_to_message is not None)
 def admin_reply(message):
     try:
