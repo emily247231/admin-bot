@@ -3,7 +3,7 @@ import telebot
 import google.generativeai as genai
 
 # আপনার টেলিগ্রাম বটের টোকেন, এডমিন আইডি এবং জেমিনি এআই কি
-TELEGRAM_TOKEN = '8835942040:AAGn7nbMH8-4sizglx954OPV93tCSNpcesI'
+TELEGRAM_TOKEN = '8916232007:AAEA2Fu-0ajtJeTf4Yr6H9RPOuTTRevsL24'
 ADMIN_ID = 8357226129
 GEMINI_API_KEY = "AQ.Ab8RN6JLhA5uE_duODuWrbUJ22i3-GQYjdPlWRL7LyLSCY1CGA"
 
