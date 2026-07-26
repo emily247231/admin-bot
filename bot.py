@@ -2,10 +2,10 @@ import os
 import telebot
 import google.generativeai as genai
 
-# আপনার টেলিগ্রাম বটের টোকেন, এডমিন আইডি এবং জেমিনি এআই কি
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN', 'আপনার_বট_টোকেন_এখানে_দিন')
+# রেন্ডারের এনভায়রনমেন্ট ভেরিয়েবল থেকে টোকেন ও এআই কি রিড করা
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 ADMIN_ID = 8357226129
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'AQ.Ab8RN6JLhA5uE_duODuWrbUJ22i3-GQYjdPlWRL7LyLSCY1CGA')
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 genai.configure(api_key=GEMINI_API_KEY)
